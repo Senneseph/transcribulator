@@ -46,21 +46,71 @@ Please include the following in your pull request:
 
 ## Development Setup
 
+Transcribulator uses Docker for development to ensure a consistent environment across all platforms. This approach eliminates the need to install Rust or any other dependencies locally.
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+- Git
+
+### Setup Steps
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/transcribulator.git
    cd transcribulator
    ```
 
-2. Build the project:
+2. Start the development environment:
+   ```bash
+   # Linux/macOS
+   ./scripts/dev.sh up
+
+   # Windows
+   .\scripts\dev.ps1 up
+   ```
+
+3. Open a shell in the development container:
+   ```bash
+   # Linux/macOS
+   ./scripts/dev.sh shell
+
+   # Windows
+   .\scripts\dev.ps1 shell
+   ```
+
+4. Build the project (from inside the container):
    ```bash
    cargo build
    ```
 
-3. Run the tests:
+5. Run the tests (from inside the container):
    ```bash
    cargo test
    ```
+
+### Common Development Tasks
+
+You can use the development scripts to perform common tasks:
+
+```bash
+# Build the project
+./scripts/dev.sh build    # Linux/macOS
+.\scripts\dev.ps1 build   # Windows
+
+# Run tests
+./scripts/dev.sh test     # Linux/macOS
+.\scripts\dev.ps1 test    # Windows
+
+# Format code
+./scripts/dev.sh format   # Linux/macOS
+.\scripts\dev.ps1 format  # Windows
+
+# Run linting checks
+./scripts/dev.sh lint     # Linux/macOS
+.\scripts\dev.ps1 lint    # Windows
+```
 
 ## Project Structure
 
@@ -75,6 +125,12 @@ Please include the following in your pull request:
 - `tests/` - Integration tests
 - `examples/` - Example code
 - `docs/` - Documentation
+- `scripts/` - Development and utility scripts
+  - `dev.sh` - Development script for Linux/macOS
+  - `dev.ps1` - Development script for Windows
+- `Dockerfile` - Production Docker image configuration
+- `Dockerfile.dev` - Development Docker image configuration
+- `docker-compose.yml` - Docker Compose configuration for development
 
 ## Coding Guidelines
 

@@ -1,0 +1,42 @@
+# version: '3.8' NOTE never use this it is so obsolete
+
+services:
+  # Development environment
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/app/target
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+
+  # Web interface
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    volumes:
+      - ./web:/app/web
+    ports:
+      - "127.0.0.1:0:8080"  # Dynamic local port binding
+    labels:
+      - "transcribulator.protocol=true"
+      - "transcribulator.service=web"
+
+  # Protocol handler service
+  protocol-handler:
+    build:
+      context: .
+      dockerfile: Dockerfile.protocol
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: ["./protocol-handler"]
+
+volumes:
+  cargo-cache:
+  target-cache:
+

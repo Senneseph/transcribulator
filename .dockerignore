@@ -1,0 +1,25 @@
+# Git
+.git
+.gitignore
+
+# Build artifacts
+/target
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Example output
+examples/output/
+
+# Docker files (not needed inside the container)
+Dockerfile
+Dockerfile.dev
+docker-compose.yml
+.dockerignore

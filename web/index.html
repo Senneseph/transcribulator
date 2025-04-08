@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcribulator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, textarea, button {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        textarea {
+            min-height: 200px;
+            font-family: monospace;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .result {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Transcribulator</h1>
+        <p>Convert code between languages</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Conversion Settings</h2>
+            <div class="form-group">
+                <label for="source-lang">Source Language:</label>
+                <select id="source-lang">
+                    <option value="c">C</option>
+                    <option value="cpp">C++</option>
+                    <option value="python">Python</option>
+                    <option value="rust">Rust</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="target-lang">Target Language:</label>
+                <select id="target-lang">
+                    <option value="rust">Rust</option>
+                    <option value="wasm">WebAssembly</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Source Code</h2>
+            <div class="form-group">
+                <textarea id="source-code" placeholder="Paste your source code here..."></textarea>
+            </div>
+            <button id="convert-btn">Convert</button>
+        </div>
+
+        <div class="card">
+            <h2>Result</h2>
+            <div class="result" id="result">
+                // Converted code will appear here
+            </div>
+            <button id="download-btn" style="margin-top: 15px;">Download Result</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('convert-btn').addEventListener('click', function() {
+            const sourceCode = document.getElementById('source-code').value;
+            const sourceLang = document.getElementById('source-lang').value;
+            const targetLang = document.getElementById('target-lang').value;
+            
+            if (!sourceCode.trim()) {
+                alert('Please enter some source code');
+                return;
+            }
+            
+            // This is a placeholder for the actual conversion
+            // In a real implementation, this would call the Transcribulator API
+            const result = `// Converted from ${sourceLang} to ${targetLang}
+// Original code:
+// ${sourceCode.split('\n').join('\n// ')}
+
+// This is a placeholder for the actual conversion result
+// The Transcribulator API is still under development`;
+            
+            document.getElementById('result').textContent = result;
+        });
+        
+        document.getElementById('download-btn').addEventListener('click', function() {
+            const result = document.getElementById('result').textContent;
+            const sourceLang = document.getElementById('source-lang').value;
+            const targetLang = document.getElementById('target-lang').value;
+            
+            // Create a blob and download it
+            const blob = new Blob([result], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `converted_${sourceLang}_to_${targetLang}.${targetLang === 'wasm' ? 'wat' : targetLang}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>
