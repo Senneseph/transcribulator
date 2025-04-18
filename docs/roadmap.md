@@ -1,15 +1,25 @@
 # Transcribulator Development Roadmap
 
-## Phase 1: Foundation (Current)
+## Phase 1: Foundation (Completed)
 
 - [x] Set up project structure
 - [x] Define intermediate representation (IR) format
 - [x] Implement basic pipeline architecture
 - [x] Create placeholder implementations for each conversion path
 - [x] Set up testing framework
-- [ ] Research and document existing tools for each conversion path
+- [x] Research and document existing tools for each conversion path
 
-## Phase 2: C to Rust Conversion
+## Phase 2: JavaScript/TypeScript to Rust Conversion (Current - Basic-Freedom Format)
+
+- [ ] Implement dependency mapping tools for JS/TS libraries
+- [ ] Create pattern recognition for common JavaScript patterns
+- [ ] Develop functional core identification methodology
+- [ ] Implement IMS Prime decomposition and analysis
+- [ ] Design pure functional Rust equivalents for common JS patterns
+- [ ] Create WASM optimization layer
+- [ ] Develop TypeScript bindings generator
+
+## Phase 3: C to Rust Conversion
 
 - [ ] Implement C parser using LLVM or similar tools
 - [ ] Develop C-specific IR generation
@@ -19,7 +29,7 @@
 - [ ] Support common C libraries and idioms
 - [ ] Implement comprehensive test suite for C to Rust conversion
 
-## Phase 3: Python to Rust Conversion
+## Phase 4: Python to Rust Conversion
 
 - [ ] Implement Python parser
 - [ ] Develop Python-specific IR generation
@@ -29,7 +39,7 @@
 - [ ] Optimize generated Rust code for performance
 - [ ] Implement comprehensive test suite for Python to Rust conversion
 
-## Phase 4: C++ to Rust Conversion
+## Phase 5: C++ to Rust Conversion
 
 - [ ] Implement C++ parser
 - [ ] Handle C++ object-oriented features
@@ -38,7 +48,7 @@
 - [ ] Handle C++ memory management patterns
 - [ ] Implement comprehensive test suite for C++ to Rust conversion
 
-## Phase 5: Rust to WebAssembly Conversion
+## Phase 6: Rust to WebAssembly Conversion
 
 - [ ] Integrate with wasm-pack
 - [ ] Optimize Rust code for WebAssembly target
@@ -47,7 +57,7 @@
 - [ ] Create browser-based JIT framework
 - [ ] Implement comprehensive test suite for Rust to WebAssembly conversion
 
-## Phase 6: Optimization and Refinement
+## Phase 7: Optimization and Refinement
 
 - [ ] Improve IR optimization passes
 - [ ] Enhance code readability of generated code
@@ -56,7 +66,7 @@
 - [ ] Create visualization tools for the conversion process
 - [ ] Optimize memory usage during conversion
 
-## Phase 7: Integration and Deployment
+## Phase 8: Integration and Deployment
 
 - [ ] Create web interface for the tool
 - [ ] Implement CI/CD pipeline

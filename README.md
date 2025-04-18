@@ -1,51 +1,70 @@
 # Transcribulator
 
-A tool for converting code between languages, focusing on C/C++/Python to Rust and Rust to WebAssembly.
+A tool for translating existing libraries into the "basic-freedom" format with pure functional style, targeting WebAssembly.
 
 ## Overview
 
-Transcribulator is a modular pipeline for code conversion between different programming languages. The primary focus is on converting C, C++, and Python code to Rust, and then potentially to WebAssembly for browser-based execution.
+Transcribulator is a modular pipeline for translating existing libraries into a pure functional Rust implementation optimized for WebAssembly. The current focus is on translating JavaScript/TypeScript libraries to Rust, starting with IMS Prime as a case study.
 
 ## Architecture
 
 Transcribulator consists of several components:
 
-### Core Conversion Pipeline
+### Analysis Pipeline
 
-The conversion process follows a pipeline architecture:
+The analysis process follows a pipeline architecture:
 
+```text
+library -> dependency_mapper -> pattern_extractor -> functional_analyzer -> translation_planner
 ```
-source_code -> parser -> IR -> optimizer -> generator -> target_code
+
+- **Dependency Mapper**: Analyzes the library's dependencies and structure
+- **Pattern Extractor**: Identifies common patterns and abstractions
+- **Functional Analyzer**: Analyzes code for functional equivalents
+- **Translation Planner**: Creates a plan for translating to Rust
+
+### Translation Pipeline
+
+The translation process follows a pipeline architecture:
+
+```text
+translation_plan -> rust_generator -> wasm_optimizer -> typescript_bridge_generator
 ```
 
-- **Parser**: Converts source code into an Intermediate Representation (IR)
-- **IR**: A language-agnostic representation of the code
-- **Optimizer**: Applies optimizations to the IR
-- **Generator**: Converts the IR into the target language
+- **Rust Generator**: Generates pure functional Rust code
+- **WASM Optimizer**: Optimizes the Rust code for WebAssembly
+- **TypeScript Bridge Generator**: Generates TypeScript bindings
 
-### Web Interface
+### Core Library
 
-A browser-based interface for interacting with the Transcribulator conversion tools:
+A set of fundamental data structures and utilities implemented in pure functional Rust:
 
-- Upload source code files for conversion
-- Select source and target languages
-- View and download converted code
-- Syntax highlighting for code display
-
-### Protocol Handler
-
-Enables integration with the operating system:
-
-- Register `transcribulator://` protocol with the operating system
-- Discover and communicate with Transcribulator services
-- Enable deep linking from external applications
+- **Data Structures**: Option, Result, Vector, Map, etc.
+- **Functional Utilities**: map, filter, fold, etc.
+- **Effect Management**: IO, Task, etc.
+- **WASM Bridge**: Utilities for WebAssembly integration
 
 ## Supported Conversions
 
-- C to Rust
-- C++ to Rust
-- Python to Rust
+- JavaScript/TypeScript to Rust (current focus)
+- C to Rust (planned)
+- C++ to Rust (planned)
+- Python to Rust (planned)
 - Rust to WebAssembly
+
+## Basic-Freedom Format
+
+The "basic-freedom" format is a set of principles and patterns for creating pure functional libraries in Rust that are optimized for WebAssembly:
+
+- **Pure Functional**: Emphasizing immutability, composition, and side-effect management
+- **Type-Safe**: Leveraging Rust's powerful type system
+- **Composable**: Building complex behavior from simple components
+- **Effect-Aware**: Making side effects explicit and controlled
+- **WASM-Optimized**: Designed from the ground up for WebAssembly performance
+
+## Current Focus: IMS Prime
+
+The initial focus of Transcribulator is to decompose and analyze IMS Prime, mapping its dependencies and core functionalities to serve as a blueprint for the translation process.
 
 ## Getting Started
 
@@ -95,43 +114,57 @@ cd transcribulator
 
 ### Usage
 
-#### Command Line
+#### Analyzing JavaScript/TypeScript Libraries
 
 ```bash
 # Using Docker
-docker run --rm -v $(pwd):/data transcribulator --input /data/input_file.c --output /data/output_file.rs --source-lang c --target-lang rust
+docker run --rm -v $(pwd):/data transcribulator analyze --input /data/library --output /data/analysis
 
 # From development container
-cargo run -- --input input_file.c --output output_file.rs --source-lang c --target-lang rust
+cargo run -- analyze --input library --output analysis
 ```
 
-#### Web Interface
+#### Generating Dependency Graphs
 
 ```bash
-# Start the web interface
-docker-compose up web
+# Using Docker
+docker run --rm -v $(pwd):/data transcribulator deps --input /data/library --output /data/deps.dot
 
-# Access the web interface in your browser
-open http://localhost:8080
+# From development container
+cargo run -- deps --input library --output deps.dot
 ```
 
-#### Protocol Handler
+#### Translating to Rust
 
-Once the protocol handler is registered, you can use deep links to interact with Transcribulator:
+```bash
+# Using Docker
+docker run --rm -v $(pwd):/data transcribulator translate --input /data/library --output /data/rust-lib --format basic-freedom
 
+# From development container
+cargo run -- translate --input library --output rust-lib --format basic-freedom
 ```
-transcribulator://convert?source=c&target=rust&file=example.c
+
+#### Generating TypeScript Bindings
+
+```bash
+# Using Docker
+docker run --rm -v $(pwd):/data transcribulator bindings --input /data/rust-lib --output /data/ts-types
+
+# From development container
+cargo run -- bindings --input rust-lib --output ts-types
 ```
 
 ## Development Status
 
-This project is in the early stages of development. The current focus is on:
+This project is in active development. The current focus is on:
 
-1. Researching existing tools for each conversion path
-2. Designing the intermediate representation (IR) format
-3. Implementing the basic pipeline architecture
-4. Developing the web interface for easier interaction
-5. Creating the protocol handler for system integration
+1. Implementing dependency mapping tools for JavaScript/TypeScript libraries
+2. Developing pattern recognition for common JavaScript patterns
+3. Creating a functional core identification methodology
+4. Implementing IMS Prime decomposition and analysis
+5. Designing pure functional Rust equivalents for common JS patterns
+6. Creating WASM optimization strategies
+7. Developing TypeScript bindings generation
 
 ## Contributing
 
