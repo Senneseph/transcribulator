@@ -1,5 +1,8 @@
 //! Transcribulator: Library and package conversion system for Cyberdeck ecosystem
 //! Follows Haskell-style type class pattern for extensible translations
+pub mod batch;
+pub mod wasm_safety;
+pub mod translation_process;
 
 pub mod core {
     use std::marker::PhantomData;
