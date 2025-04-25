@@ -1,0 +1,1 @@
+D:\Projects\transcribulator\target\debug\transcribulator.exe: D:\Projects\transcribulator\src\generator.rs D:\Projects\transcribulator\src\ir.rs D:\Projects\transcribulator\src\lib.rs D:\Projects\transcribulator\src\main.rs D:\Projects\transcribulator\src\optimizer.rs D:\Projects\transcribulator\src\parser.rs D:\Projects\transcribulator\src\utils.rs
